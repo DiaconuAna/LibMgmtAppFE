@@ -37,9 +37,9 @@
 							"src/styles.css"
 						],
 						"scripts": [],
-						"ssr": {
-							"entry": "server.ts"
-						},
+//						"ssr": {
+//							"entry": "server.ts"
+//						},
 						"main": "src/main.ts",
 						"extraWebpackConfig": "webpack.config.js",
 						"commonChunk": false

@@ -1,9 +1,11 @@
 const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
 
-module.exports = withModuleFederationPlugin({
+const HostConfigModuleFederationPlugin = withModuleFederationPlugin({
 
   remotes: {
-    "mfe1": "http://localhost:3000/remoteEntry.js",    
+    "authentification": "http://localhost:4201/remoteEntry.js",
+    // "books": "http://localhost:4202/remoteEntry.js",
+    // "user": "http://localhost:4203/remoteEntry.js",
   },
 
   shared: {
@@ -11,3 +13,5 @@ module.exports = withModuleFederationPlugin({
   },
 
 });
+HostConfigModuleFederationPlugin.output.publicPath = 'http://localhost:4200/';
+module.exports = HostConfigModuleFederationPlugin;

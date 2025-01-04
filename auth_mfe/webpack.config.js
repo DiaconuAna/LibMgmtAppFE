@@ -1,11 +1,15 @@
 const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
 
-module.exports = withModuleFederationPlugin({
+const AuthModuleFederationConfigPlugin = withModuleFederationPlugin({
 
-  name: 'auth_mfe',
+  name: 'auth',
+
+  remotes: {
+    "authentification": "http://localhost:4201/remoteEntry.js",
+  },
 
   exposes: {
-    './Component': './src/app/app.component.ts',
+    './AuthModule': './src/app/app.module.ts',
   },
 
   shared: {
@@ -13,3 +17,6 @@ module.exports = withModuleFederationPlugin({
   },
 
 });
+
+AuthModuleFederationConfigPlugin.output.publicPath = 'http://localhost:4201/'
+module.exports = AuthModuleFederationConfigPlugin;
