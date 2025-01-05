@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: 'books', component: BookListComponent },        // Route for listing books
+      { path: '', component: BookListComponent },        // Route for listing books
       // { path: 'books/:id', component: BookDetailComponent },  // Route for book details
     ]),
   ],

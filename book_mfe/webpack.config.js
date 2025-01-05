@@ -5,13 +5,9 @@ const { shareAll, withModuleFederationPlugin } = require('@angular-architects/mo
 const BookModuleFederationConfigPlugin = withModuleFederationPlugin({
 
   name: 'book',
-  filename: 'remoteEntry.js',
-  remotes: {
-    "book": "http://localhost:4202/remoteEntry.js",
-  },
 
   exposes: {
-    './Module': './src/app/book/book.module.ts',
+    './BookModule': 'E:\\Business\\Master\\Sem3\\SOA\\LibMgmtAppFE\\book_mfe\\src\\app\\book\\book.module.ts',  // Exposing the module with a more descriptive name
   },
 
   shared: {
