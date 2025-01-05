@@ -1,11 +1,13 @@
+// webpack.config.js (Book Remote)
+
 const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
 
-module.exports = withModuleFederationPlugin({
+const UserModuleFederationConfigPlugin = withModuleFederationPlugin({
 
-  name: 'user_mfe',
+  name: 'user',
 
   exposes: {
-    './Component': './src/app/app.component.ts',
+    './UserModule': 'E:\\Business\\Master\\Sem3\\SOA\\LibMgmtAppFE\\user_mfe\\src\\app\\user\\user.module.ts',
   },
 
   shared: {
@@ -13,3 +15,6 @@ module.exports = withModuleFederationPlugin({
   },
 
 });
+
+UserModuleFederationConfigPlugin.output.publicPath = 'http://localhost:4203/'
+module.exports = UserModuleFederationConfigPlugin;

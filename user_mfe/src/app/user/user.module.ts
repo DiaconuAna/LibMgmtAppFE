@@ -1,16 +1,18 @@
-// src/app/book/book.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BookListComponent } from './book-list/book-list.component';
+import { MainPageComponent } from './main-page/main-page.component';
 import { RouterModule } from '@angular/router';
 
+
 @NgModule({
-  declarations: [BookListComponent],
+  declarations: [
+    MainPageComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: '', component: BookListComponent },
+      { path: '', component: MainPageComponent },
     ]),
-  ],
+  ]
 })
-export class BookModule {}
+export class UserModule { }
