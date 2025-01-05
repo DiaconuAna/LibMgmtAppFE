@@ -7,6 +7,8 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';  // Import AppRoutingModule
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { AppRoutingModule } from './app-routing.module';  // Import AppRoutingMo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,  // Add AppRoutingModule here
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

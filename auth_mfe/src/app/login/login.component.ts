@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';  // Import Router for navigation
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -15,12 +16,14 @@ export class LoginComponent {
   registerName = '';
   registerRole = 'user'; // Default role
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private router: Router) {}
 
   onLogin(): void {
     this.authService.login(this.loginUsername, this.loginPassword).subscribe(
       (response: { msg: any; access_token: string; }) => {
         alert(response.msg); // Display success message
+        // Redirect to books route upon successful login
+        this.router.navigate(['/books']);
         localStorage.setItem('access_token', response.access_token); // Store JWT token
       },
       (error: { error: { msg: any; }; }) => {
