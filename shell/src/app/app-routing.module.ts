@@ -1,15 +1,11 @@
 // src/app/app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
-import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
+
 import { loadRemoteModule } from '@angular-architects/module-federation';
-// declare module 'auth/LoginModule';
+import {AuthGuard} from "./core/auth.guard.service";
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   loadChildren: () => import('auth/LoginModule').then(m => m.FlightsModule)
-  // },
+
   {
     path: '',
     // component: MainLayoutComponent,
@@ -37,6 +33,7 @@ const routes: Routes = [
           console.error('Error loading remote module:', err);
           // return ErrorModule;
         }),
+    canActivate: [AuthGuard],
   },
   {
     path: '**',
