@@ -1,11 +1,17 @@
+// webpack.config.js (Book Remote)
+
 const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
 
-module.exports = withModuleFederationPlugin({
+const BookModuleFederationConfigPlugin = withModuleFederationPlugin({
 
-  name: 'book_mfe',
+  name: 'book',
+  filename: 'remoteEntry.js',
+  remotes: {
+    "book": "http://localhost:4202/remoteEntry.js",
+  },
 
   exposes: {
-    './Component': './src/app/app.component.ts',
+    './Module': './src/app/book/book.module.ts',
   },
 
   shared: {
@@ -13,3 +19,6 @@ module.exports = withModuleFederationPlugin({
   },
 
 });
+
+BookModuleFederationConfigPlugin.output.publicPath = 'http://localhost:4202/'
+module.exports = BookModuleFederationConfigPlugin;
