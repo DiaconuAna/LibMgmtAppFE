@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -6,44 +7,51 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  // Login properties
   loginUsername = '';
   loginPassword = '';
 
-  // Registration properties
   registerUsername = '';
-  registerName = '';
   registerPassword = '';
-  registerRole = 'user'; // Default role is 'user'
+  registerName = '';
+  registerRole = 'user'; // Default role
 
-  onLogin() {
-    if (this.loginUsername && this.loginPassword) {
-      // Mock login logic
-      console.log('Login attempted with:', this.loginUsername, this.loginPassword);
-      alert('Login successful!');
-      localStorage.setItem('authToken', 'mock-jwt-token'); // Simulate token storage
-    } else {
-      alert('Please enter both username and password.');
-    }
+  constructor(private authService: AuthService) {}
+
+  onLogin(): void {
+    this.authService.login(this.loginUsername, this.loginPassword).subscribe(
+      (response: { msg: any; access_token: string; }) => {
+        alert(response.msg); // Display success message
+        localStorage.setItem('access_token', response.access_token); // Store JWT token
+      },
+      (error: { error: { msg: any; }; }) => {
+        alert(error.error.msg); // Display error message
+      }
+    );
   }
 
-  onRegister() {
-    if (
-      this.registerUsername &&
-      this.registerName &&
-      this.registerPassword &&
-      this.registerRole
-    ) {
-      // Mock registration logic
-      console.log('Register attempted with:', {
-        username: this.registerUsername,
-        name: this.registerName,
-        password: this.registerPassword,
-        role: this.registerRole,
-      });
-      alert('Registration successful!');
-    } else {
-      alert('Please fill in all fields.');
-    }
+  onRegister(): void {
+    this.authService
+      .register(
+        this.registerUsername,
+        this.registerPassword,
+        this.registerName,
+        this.registerRole
+      )
+      .subscribe(
+        (response: { msg: any; }) => {
+          alert(response.msg); // Display success message
+          this.clearRegistrationForm(); // Clear form fields
+        },
+        (error: { error: { msg: any; }; }) => {
+          alert(error.error.msg); // Display error message
+        }
+      );
+  }
+
+  clearRegistrationForm(): void {
+    this.registerUsername = '';
+    this.registerPassword = '';
+    this.registerName = '';
+    this.registerRole = 'user';
   }
 }
