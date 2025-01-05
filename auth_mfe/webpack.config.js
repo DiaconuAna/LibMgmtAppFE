@@ -3,13 +3,13 @@ const { shareAll, withModuleFederationPlugin } = require('@angular-architects/mo
 const AuthModuleFederationConfigPlugin = withModuleFederationPlugin({
 
   name: 'auth',
-
+  filename: 'remoteEntry.js',
   remotes: {
     "authentification": "http://localhost:4201/remoteEntry.js",
   },
 
   exposes: {
-    './AuthModule': './src/app/app.module.ts',
+    './Module': './src/app/login/login.module.ts',
   },
 
   shared: {
