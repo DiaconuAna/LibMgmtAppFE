@@ -1,0 +1,21 @@
+<div *ngIf="errorMessage" class="error-message">
+  <p>{{ errorMessage }}</p>
+</div>
+
+<div *ngIf="!errorMessage && books.length > 0" class="book-list">
+  <h2>Book List</h2>
+  <ul>
+    <li *ngFor="let book of books">
+      <div class="book-item">
+        <h3>{{ book.title }}</h3>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+        <p><strong>Available Copies:</strong> {{ book.available_copies }}</p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="!errorMessage && books.length === 0" class="no-books">
+  <p>No books available.</p>
+</div>

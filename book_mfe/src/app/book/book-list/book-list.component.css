@@ -1,0 +1,29 @@
+.book-list {
+  margin-top: 20px;
+}
+
+.book-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.book-item h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.book-item p {
+  margin: 5px 0;
+}
+
+.error-message {
+  color: red;
+  font-size: 1.2em;
+}
+
+.no-books {
+  margin-top: 20px;
+  font-size: 1.2em;
+}

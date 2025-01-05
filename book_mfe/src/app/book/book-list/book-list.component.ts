@@ -1,19 +1,29 @@
-// src/app/book/book-list/book-list.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BookService } from '../../service/book.service';
 
 @Component({
-  selector: 'app-book-list',
-  template: `
-    <h2>Books List</h2>
-    <ul>
-      <li *ngFor="let book of books">{{ book.name }}</li>
-    </ul>
-  `,
+  selector: 'app-book',
+  templateUrl: './book-list.component.html',
+  styleUrls: ['./book-list.component.css'],
 })
-export class BookListComponent {
-  books = [
-    { name: 'The Great Gatsby' },
-    { name: '1984' },
-    { name: 'To Kill a Mockingbird' },
-  ];
+export class BookListComponent implements OnInit {
+  books: any[] = [];
+  errorMessage: string = '';
+
+  constructor(private bookService: BookService) {}
+
+  ngOnInit(): void {
+    this.fetchBooks();
+  }
+
+  fetchBooks(): void {
+    this.bookService.getAllBooks().subscribe(
+      (response) => {
+        this.books = response.books; // Assume response contains the books
+      },
+      (error) => {
+        this.errorMessage = error.error.msg || 'An error occurred while retrieving books.';
+      }
+    );
+  }
 }
