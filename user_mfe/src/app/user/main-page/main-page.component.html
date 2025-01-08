@@ -1,1 +1,17 @@
-<p>main-page works!</p>
+<div class="profile-section">
+  <h2>User Profile</h2>
+  <p><strong>Name:</strong> {{ userProfile.name }}</p>
+  <p><strong>Username:</strong> {{ userProfile.username }}</p>
+  <p><strong>Role:</strong> {{ userRole }}</p>
+</div>
+
+<div class="actions-section">
+  <div *ngIf="userRole === 'librarian'">
+    <button>Add Book</button>
+    <button>Get Users</button>
+  </div>
+  <div *ngIf="userRole === 'user'">
+    <button>Borrow Book</button>
+    <button>Return Book</button>
+  </div>
+</div>

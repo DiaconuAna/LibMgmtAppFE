@@ -25,6 +25,11 @@ const routes: Routes = [
     component: MainLayoutComponent,  // Main layout as the parent component
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'user', // Redirect to the user MFE
+      },
+      {
         path: 'books',
         loadChildren: () =>
           loadRemoteModule({
