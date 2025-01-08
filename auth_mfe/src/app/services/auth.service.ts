@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -50,9 +51,21 @@ export class AuthService {
     return localStorage.getItem('jwt_token');
   }
 
-  // Remove JWT token
-  removeToken(): void {
-    localStorage.removeItem('jwt_token');
-  }
+  getUserRole(): string {
+    const token = localStorage.getItem('jwt_token');  // Assuming JWT token is stored in localStorage
 
+    if (!token) {
+      return '';  // No token, return empty string or handle accordingly
+    }
+
+    try {
+      const decodedToken: any = jwtDecode(token);  // Decode the JWT token
+      localStorage.setItem('user_role', decodedToken.role || '');
+      console.log("user role is: ", localStorage.getItem('user_role'))
+      return decodedToken.role || '';  // Assuming 'role' is the claim in the token
+    } catch (error) {
+      console.error('Error decoding token', error);
+      return '';  // Handle the case where decoding fails
+    }
+  }
 }

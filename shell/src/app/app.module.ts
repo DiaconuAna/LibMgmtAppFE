@@ -5,12 +5,16 @@ import { AppComponent } from './app.component';
 import {AuthGuard} from './core/auth.guard.service';
 import { AppRoutingModule } from './app-routing.module';  // Import AppRoutingModule
 import { HttpClientModule } from '@angular/common/http';
-import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';  // Add these imports
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MainLayoutComponent } from './main-layout/main-layout.component';  // Add these imports
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavbarComponent,
+    MainLayoutComponent,
   ],
   imports: [
     BrowserModule,

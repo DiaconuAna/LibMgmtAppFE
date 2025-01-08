@@ -21,9 +21,10 @@ export class LoginComponent {
   onLogin(): void {
     this.authService.login(this.loginUsername, this.loginPassword).subscribe(
       (response: { msg: any; access_token: string; }) => {
-        alert(response.msg); // Display success message
-        // Redirect to books route upon successful login
-        this.router.navigate(['/books']);
+        // alert(response.msg);
+        // Store the user role locally
+        this.authService.getUserRole();
+        this.router.navigate(['/main']);
         localStorage.setItem('access_token', response.access_token); // Store JWT token
       },
       (error: { error: { msg: any; }; }) => {
