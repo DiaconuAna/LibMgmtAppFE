@@ -41,4 +41,18 @@ export class UserServiceService {
     return this.http.get<GetUsersResponse>(`${this.userUrl}/users`, this.getHttpOptions());
   }
 
+  getBorrowings(userId: number): Observable<any[]> {
+
+   let url = `http://localhost:3000/dev/user/borrowings?user_id=${userId}`
+    let url2 = `http://localhost/user/borrowings?user_id=${userId}`
+    let url3 = `http://192.168.176.136/user/borrowings?user_id=${userId}`
+    return this.http.get<any>(url, this.getHttpOptions());
+  }
+
+  returnBook(book: number): Observable<any>{
+    let userId = localStorage.getItem('user_id');
+    const payload = { user_id: userId, book_id: book };
+    console.log(payload)
+    return this.http.post(`${this.userUrl}/return`, payload, this.getHttpOptions());
+  }
 }

@@ -13,6 +13,8 @@ export class MainPageComponent implements OnInit {
   showAddBookForm = false;
   users: User[] = [];
   showUsers = false;
+  showBorrowings = false;
+  borrowings: any[] = [];
 
   constructor(private userService: UserServiceService) {}
 
@@ -53,8 +55,33 @@ export class MainPageComponent implements OnInit {
     );
   }
 
-  closeUsers() {
-    this.showUsers = false;
+  fetchUserBorrowings(user_id : number) {
+    this.userService.getBorrowings(user_id).subscribe(
+      (response) => {
+        this.borrowings = response; // Store borrowings in the local variable
+        console.log('Borrowings:', response);
+        this.showBorrowings = true;
+      },
+      (error) => {
+        console.error('Failed to fetch borrowings:', error);
+        // this.errorMessage = error.error?.msg || 'An error occurred while fetching borrowings';
+      }
+    );
+  }
+
+  returnBook(book: any){
+    this.userService.returnBook(book.book_id).subscribe(
+      (response) => {
+        alert(`You have successfully returned the book: ${book.title}`);
+        // Update the book's available copies count locally
+        book.available_copies++;
+        this.fetchUserBorrowings(this.userProfile.id);
+      },
+      (error) => {
+        console.error('Failed to return book:', error);
+        alert('Could not return the book. Please try again.');
+      }
+    );
   }
 
 }

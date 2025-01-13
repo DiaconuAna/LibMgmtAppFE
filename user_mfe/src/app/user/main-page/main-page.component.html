@@ -9,19 +9,17 @@
   <div *ngIf="userRole === 'librarian'" class="button-container">
     <button (click)="toggleAddBookForm()">Add Book</button>
     <button (click)="fetchUsers()">Get Users</button>
-
-    <app-add-book
-      *ngIf="showAddBookForm"
-      (bookAdded)="onBookAdded()"
-    ></app-add-book>
-
   </div>
 
   <div *ngIf="userRole === 'user'" class="button-container">
-    <button>View Borrowed Books</button>
-    <button>Return Book</button>
+    <button (click)="fetchUserBorrowings(userProfile.id)">View Borrowed Books</button>
   </div>
 </div>
+
+<app-add-book
+  *ngIf="showAddBookForm"
+  (bookAdded)="onBookAdded()"
+></app-add-book>
 
 <div *ngIf="showUsers" class="users-list">
   <h3>Users</h3>
@@ -29,8 +27,30 @@
     <li *ngFor="let user of users">
       <strong>Name:</strong> {{ user.name }} |
       <strong>Username:</strong> {{ user.username }} |
-      <button>See Books Borrowed By User</button>
+      <button *ngIf="user.role === 'user'" (click)="fetchUserBorrowings(user.id)">See Books Borrowed By User</button>
     </li>
   </ul>
-  <button (click)="closeUsers()">Close</button>
+  <button (click)="this.showUsers = false;">Close</button>
 </div>
+
+<div *ngIf="showBorrowings">
+  <ul *ngIf="borrowings.length > 0; else noBorrowingsMessage">
+  <li *ngFor="let book of borrowings">
+      <div class="book-item">
+        <h3>{{ book.title }}</h3>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+        <p><strong>Borrowed on:</strong> {{ book.borrowed_on }}</p>
+        <p><strong>Return By:</strong> {{ book.return_by }}</p>
+        <button *ngIf="userRole === 'user'" (click)="returnBook(book)">
+          Return Book
+        </button>
+      </div>
+    </li>
+  </ul>
+  <button (click)="this.showBorrowings = false">Close</button>
+</div>
+
+<ng-template #noBorrowingsMessage>
+  <p>No borrowings to display.</p>
+</ng-template>
