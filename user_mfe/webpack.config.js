@@ -7,7 +7,7 @@ const UserModuleFederationConfigPlugin = withModuleFederationPlugin({
   name: 'user',
 
   exposes: {
-    './UserModule': 'E:\\Business\\Master\\Sem3\\SOA\\LibMgmtAppFE\\user_mfe\\src\\app\\user\\user.module.ts',
+    './UserModule': './src/app/user/user.module.ts',
   },
 
   shared: {
