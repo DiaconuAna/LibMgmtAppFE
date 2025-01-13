@@ -1,0 +1,14 @@
+<!-- src/app/navbar/navbar.component.html -->
+<nav class="navbar">
+  <ul class="navbar-list">
+    <li class="navbar-item">
+      <a routerLink="/main/user" class="navbar-link">User Operations</a>
+    </li>
+    <li class="navbar-item">
+      <a routerLink="/main/books" class="navbar-link">Books</a>
+    </li>
+    <li class="navbar-item">
+      <a class="navbar-link" (click)="logout()">Logout</a>
+    </li>
+  </ul>
+</nav>

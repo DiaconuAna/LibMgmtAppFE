@@ -7,9 +7,15 @@
 
 <div class="actions-section">
   <div *ngIf="userRole === 'librarian'">
-    <button>Add Book</button>
+    <button (click)="toggleAddBookForm()">Add Book</button>
     <button>Get Users</button>
+
+    <app-add-book
+      *ngIf="showAddBookForm"
+      (bookAdded)="onBookAdded()"
+    ></app-add-book>
   </div>
+
   <div *ngIf="userRole === 'user'">
     <button>Borrow Book</button>
     <button>Return Book</button>

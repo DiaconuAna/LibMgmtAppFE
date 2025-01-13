@@ -1,0 +1,29 @@
+<div class="add-book-form">
+  <h3>Add a New Book</h3>
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Title:</label>
+      <input id="title" [(ngModel)]="newBook.title" name="title" required />
+    </div>
+    <div>
+      <label for="author">Author:</label>
+      <input id="author" [(ngModel)]="newBook.author" name="author" required />
+    </div>
+    <div>
+      <label for="isbn">ISBN:</label>
+      <input id="isbn" [(ngModel)]="newBook.isbn" name="isbn" required />
+    </div>
+    <div>
+      <label for="availableCopies">Available Copies:</label>
+      <input
+        id="availableCopies"
+        type="number"
+        [(ngModel)]="newBook.availableCopies"
+        name="availableCopies"
+        min="1"
+        required
+      />
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</div>

@@ -9,6 +9,7 @@ import { UserServiceService } from '../../service/user-service.service';
 export class MainPageComponent implements OnInit {
   userProfile: any;
   userRole: string | null = '';
+  showAddBookForm = false;
 
   constructor(private userService: UserServiceService) {}
 
@@ -25,4 +26,14 @@ export class MainPageComponent implements OnInit {
       }
     );
   }
+
+  toggleAddBookForm() {
+    this.showAddBookForm = !this.showAddBookForm;
+  }
+
+  onBookAdded() {
+    alert('Book has been added successfully!');
+    this.showAddBookForm = false; // Close the form after successful submission
+  }
+
 }
