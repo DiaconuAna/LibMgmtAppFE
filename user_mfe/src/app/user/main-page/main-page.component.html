@@ -6,18 +6,31 @@
 </div>
 
 <div class="actions-section">
-  <div *ngIf="userRole === 'librarian'">
+  <div *ngIf="userRole === 'librarian'" class="button-container">
     <button (click)="toggleAddBookForm()">Add Book</button>
-    <button>Get Users</button>
+    <button (click)="fetchUsers()">Get Users</button>
 
     <app-add-book
       *ngIf="showAddBookForm"
       (bookAdded)="onBookAdded()"
     ></app-add-book>
+
   </div>
 
-  <div *ngIf="userRole === 'user'">
-    <button>Borrow Book</button>
+  <div *ngIf="userRole === 'user'" class="button-container">
+    <button>View Borrowed Books</button>
     <button>Return Book</button>
   </div>
+</div>
+
+<div *ngIf="showUsers" class="users-list">
+  <h3>Users</h3>
+  <ul>
+    <li *ngFor="let user of users">
+      <strong>Name:</strong> {{ user.name }} |
+      <strong>Username:</strong> {{ user.username }} |
+      <button>See Books Borrowed By User</button>
+    </li>
+  </ul>
+  <button (click)="closeUsers()">Close</button>
 </div>

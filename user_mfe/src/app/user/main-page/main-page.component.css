@@ -24,3 +24,10 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.button-container {
+  display: flex;
+  justify-content: space-around; /* Evenly space the buttons */
+  gap: 10px; /* Optional: Add spacing between buttons */
+  margin: 10px 0; /* Optional: Add spacing above and below the buttons */
+}

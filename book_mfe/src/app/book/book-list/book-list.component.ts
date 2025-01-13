@@ -9,11 +9,14 @@ import { BookService } from '../../service/book.service';
 export class BookListComponent implements OnInit {
   books: any[] = [];
   errorMessage: string = '';
+  userRole: string | null = '';
+
 
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
     this.fetchBooks();
+    this.userRole = localStorage.getItem('user_role');
   }
 
   fetchBooks(): void {
@@ -26,4 +29,19 @@ export class BookListComponent implements OnInit {
       }
     );
   }
+
+  borrowBook(book: any) {
+    this.bookService.borrowBook(book.id).subscribe(
+      (response) => {
+        alert(`You have successfully borrowed the book: ${book.title}`);
+        // Update the book's available copies count locally
+        book.available_copies--;
+      },
+      (error) => {
+        console.error('Failed to borrow book:', error);
+        alert('Could not borrow the book. Please try again.');
+      }
+    );
+  }
+
 }

@@ -9,6 +9,12 @@
   border-radius: 5px;
 }
 
+.book-item:hover {
+  background-color: #e8f4fc; /* Highlight color on hover */
+  transform: translateY(-3px); /* Slight upward movement */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
 .book-item h3 {
   margin: 0;
   font-size: 1.2em;

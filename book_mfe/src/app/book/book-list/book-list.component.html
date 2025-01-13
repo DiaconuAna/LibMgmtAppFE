@@ -11,6 +11,9 @@
         <p><strong>Author:</strong> {{ book.author }}</p>
         <p><strong>ISBN:</strong> {{ book.isbn }}</p>
         <p><strong>Available Copies:</strong> {{ book.available_copies }}</p>
+        <button *ngIf="userRole === 'user'" (click)="borrowBook(book)">
+          Borrow Book
+        </button>
       </div>
     </li>
   </ul>

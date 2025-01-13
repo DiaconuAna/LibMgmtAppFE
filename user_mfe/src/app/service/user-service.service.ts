@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {map, Observable} from 'rxjs';
+import { GetUsersResponse } from '../user/model/user.model';
+
 
 @Injectable({
   providedIn: 'root',
@@ -34,4 +36,9 @@ export class UserServiceService {
   addBook(book: any): Observable<any> {
     return this.http.post(`${this.bookurl}/add`, book, this.getHttpOptions());
   }
+
+  getUsers(): Observable<GetUsersResponse> {
+    return this.http.get<GetUsersResponse>(`${this.userUrl}/users`, this.getHttpOptions());
+  }
+
 }

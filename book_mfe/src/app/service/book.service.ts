@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class BookService {
   private apiUrl = 'http://localhost/book'; // Adjust this to your backend URL
+  private userUrl = 'http://localhost/user'; // Adjust this to your backend URL
 
   constructor(private http: HttpClient) {}
 
@@ -29,5 +30,14 @@ export class BookService {
   getAllBooks(): Observable<any> {
     const httpOptions = this.getHttpOptions();
     return this.http.get(`${this.apiUrl}/all_books`, httpOptions);
+  }
+
+  borrowBook(bookId: number): Observable<any> {
+    let userId = localStorage.getItem('user_id');
+    const url = `${this.userUrl}/borrow`;
+    console.log(url)
+    const payload = { user_id: userId, book_id: bookId };
+    console.log(payload)
+    return this.http.post(`${this.userUrl}/borrow`, payload, this.getHttpOptions());
   }
 }

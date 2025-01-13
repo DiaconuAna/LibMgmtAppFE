@@ -61,7 +61,9 @@ export class AuthService {
     try {
       const decodedToken: any = jwtDecode(token);  // Decode the JWT token
       localStorage.setItem('user_role', decodedToken.role || '');
+      localStorage.setItem('user_id', decodedToken.id || '');
       console.log("user role is: ", localStorage.getItem('user_role'))
+      console.log("user id is: ", localStorage.getItem('user_id'))
       return decodedToken.role || '';  // Assuming 'role' is the claim in the token
     } catch (error) {
       console.error('Error decoding token', error);

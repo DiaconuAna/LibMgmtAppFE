@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../../service/user-service.service';
+import {User} from '../model/user.model';
 
 @Component({
   selector: 'app-main-page',
@@ -10,6 +11,8 @@ export class MainPageComponent implements OnInit {
   userProfile: any;
   userRole: string | null = '';
   showAddBookForm = false;
+  users: User[] = [];
+  showUsers = false;
 
   constructor(private userService: UserServiceService) {}
 
@@ -34,6 +37,24 @@ export class MainPageComponent implements OnInit {
   onBookAdded() {
     alert('Book has been added successfully!');
     this.showAddBookForm = false; // Close the form after successful submission
+  }
+
+  fetchUsers() {
+    this.userService.getUsers().subscribe(
+      (response) => {
+        this.users = response.users;
+        console.log(this.users)
+        this.showUsers = true;
+      },
+      (error) => {
+        console.error('Failed to fetch users:', error);
+        alert('Could not fetch users. Please try again.');
+      }
+    );
+  }
+
+  closeUsers() {
+    this.showUsers = false;
   }
 
 }
