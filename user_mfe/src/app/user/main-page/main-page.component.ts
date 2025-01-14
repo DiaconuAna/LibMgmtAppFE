@@ -20,6 +20,10 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userRole = localStorage.getItem('user_role');
+    this.userProfile = {
+      name: "",
+      username: "",
+    };
     console.log("User role? ", this.userRole)
     this.userService.getUserProfile().subscribe(
       (response: any) => {
