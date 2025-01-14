@@ -6,14 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class BookService {
-  private apiUrl = 'http://localhost/book'; // Adjust this to your backend URL
-  private userUrl = 'http://localhost/user'; // Adjust this to your backend URL
+  private apiUrl = 'http://localhost/book';
+  private userUrl = 'http://localhost/user';
 
   constructor(private http: HttpClient) {}
 
-  // Get the JWT token from localStorage
+  // Get the JWT token from sessionStorage
   getAuthToken(): string | null {
-    return localStorage.getItem('jwt_token');
+    return sessionStorage.getItem('jwt_token');
   }
 
   // Set up the Authorization header with JWT token
@@ -33,7 +33,7 @@ export class BookService {
   }
 
   borrowBook(bookId: number): Observable<any> {
-    let userId = localStorage.getItem('user_id');
+    let userId = sessionStorage.getItem('user_id');
     const url = `${this.userUrl}/borrow`;
     console.log(url)
     const payload = { user_id: userId, book_id: bookId };

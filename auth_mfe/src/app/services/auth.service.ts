@@ -22,7 +22,7 @@ export class AuthService {
       tap((response: any) => {
         if (response?.access_token) {
           console.log('Login success: token is ', response.access_token)
-          this.storeToken(response.access_token);  // Store token in localStorage
+          this.storeToken(response.access_token);  // Store token in sessionStorage
         } else {
           console.error('Login failed: No token in response');
         }
@@ -43,16 +43,16 @@ export class AuthService {
 
   // Store JWT token
   storeToken(token: string): void {
-    localStorage.setItem('jwt_token', token);  // Use sessionStorage if token should be cleared on tab close
+    sessionStorage.setItem('jwt_token', token);  // Use sessionStorage if token should be cleared on tab close
   }
 
   // Get JWT token
   getToken(): string | null {
-    return localStorage.getItem('jwt_token');
+    return sessionStorage.getItem('jwt_token');
   }
 
   getUserRole(): string {
-    const token = localStorage.getItem('jwt_token');  // Assuming JWT token is stored in localStorage
+    const token = sessionStorage.getItem('jwt_token');  // Assuming JWT token is stored in sessionStorage
 
     if (!token) {
       return '';  // No token, return empty string or handle accordingly
@@ -60,10 +60,10 @@ export class AuthService {
 
     try {
       const decodedToken: any = jwtDecode(token);  // Decode the JWT token
-      localStorage.setItem('user_role', decodedToken.role || '');
-      localStorage.setItem('user_id', decodedToken.id || '');
-      console.log("user role is: ", localStorage.getItem('user_role'))
-      console.log("user id is: ", localStorage.getItem('user_id'))
+      sessionStorage.setItem('user_role', decodedToken.role || '');
+      sessionStorage.setItem('user_id', decodedToken.id || '');
+      console.log("user role is: ", sessionStorage.getItem('user_role'))
+      console.log("user id is: ", sessionStorage.getItem('user_id'))
       return decodedToken.role || '';  // Assuming 'role' is the claim in the token
     } catch (error) {
       console.error('Error decoding token', error);

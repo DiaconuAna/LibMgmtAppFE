@@ -55,6 +55,7 @@ const routes: Routes = [
             .catch((err: any) => {
               console.error('Error loading remote module:', err);
             }),
+        canActivate: [AuthGuard],
       },
     ],
   },

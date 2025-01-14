@@ -19,7 +19,7 @@ export class MainPageComponent implements OnInit {
   constructor(private userService: UserServiceService) {}
 
   ngOnInit(): void {
-    this.userRole = localStorage.getItem('user_role');
+    this.userRole = sessionStorage.getItem('user_role');
     this.userProfile = {
       name: "",
       username: "",

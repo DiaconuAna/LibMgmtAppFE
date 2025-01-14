@@ -11,8 +11,8 @@ export class NavbarComponent {
 
   logout(): void {
     // Clear tokens and user-related data
-    localStorage.removeItem('jwt_token'); // Or sessionStorage.removeItem() if used
-    localStorage.removeItem('user_role'); // Optional: Clear cached role if stored
+    sessionStorage.removeItem('jwt_token'); // Or sessionStorage.removeItem() if used
+    sessionStorage.removeItem('user_role'); // Optional: Clear cached role if stored
 
     // Redirect to the login page
     this.router.navigate(['/login']);

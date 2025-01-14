@@ -25,7 +25,7 @@ export class LoginComponent {
         // Store the user role locally
         this.authService.getUserRole();
         this.router.navigate(['/main']);
-        localStorage.setItem('access_token', response.access_token); // Store JWT token
+        sessionStorage.setItem('access_token', response.access_token); // Store JWT token
       },
       (error: { error: { msg: any; }; }) => {
         alert(error.error.msg); // Display error message

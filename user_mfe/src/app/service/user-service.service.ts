@@ -8,14 +8,14 @@ import { GetUsersResponse } from '../user/model/user.model';
   providedIn: 'root',
 })
 export class UserServiceService {
-  private userUrl = 'http://localhost/user'; // Replace with your Python backend's base URL
-  private bookurl = 'http://localhost/book'; // Update with your backend URL
-
+  private userUrl = 'http://localhost/user';
+  private bookurl = 'http://localhost/book';
+  private faasurl = 'http://localhost:3000/dev/user/borrowings';
 
   constructor(private http: HttpClient) {}
 
   getAuthToken(): string | null {
-    return localStorage.getItem('jwt_token');
+    return sessionStorage.getItem('jwt_token');
   }
 
   // Set up the Authorization header with JWT token
@@ -42,17 +42,12 @@ export class UserServiceService {
   }
 
   getBorrowings(userId: number): Observable<any[]> {
-
-   let url = `http://localhost:3000/dev/user/borrowings?user_id=${userId}`
-    let url2 = `http://localhost/user/borrowings?user_id=${userId}`
-    let url3 = `http://192.168.176.136/user/borrowings?user_id=${userId}`
-    return this.http.get<any>(url, this.getHttpOptions());
+    return this.http.get<any>(`${this.faasurl}?user_id=${userId}`, this.getHttpOptions());
   }
 
   returnBook(book: number): Observable<any>{
-    let userId = localStorage.getItem('user_id');
+    let userId = sessionStorage.getItem('user_id');
     const payload = { user_id: userId, book_id: book };
-    console.log(payload)
     return this.http.post(`${this.userUrl}/return`, payload, this.getHttpOptions());
   }
 }

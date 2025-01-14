@@ -16,7 +16,7 @@ export class BookListComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchBooks();
-    this.userRole = localStorage.getItem('user_role');
+    this.userRole = sessionStorage.getItem('user_role');
   }
 
   fetchBooks(): void {
