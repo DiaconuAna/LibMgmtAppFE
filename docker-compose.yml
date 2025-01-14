@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  host:
+    build:
+      context: ./shell
+    ports:
+      - "4200:4200"
+    depends_on:
+      - auth_mfe
+      - book_mfe
+      - user_mfe
+
+  auth_mfe:
+    build:
+      context: ./auth_mfe
+    ports:
+      - "4201:4201"
+
+  book_mfe:
+    build:
+      context: ./book_mfe
+    ports:
+      - "4202:4202"
+
+  user_mfe:
+    build:
+      context: ./user_mfe
+    ports:
+      - "4203:4203"
